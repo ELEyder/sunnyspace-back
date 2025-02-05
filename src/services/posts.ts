@@ -1,4 +1,7 @@
-import db from '../db/firebase'
+import { db } from '../db/firebase'
+
+import { IPost } from '../interfaces/IPost';
+import { IPostForm } from '../interfaces/IPostFrom';
 
 export const getPosts = async () => {
     try {
@@ -18,24 +21,28 @@ export const getPosts = async () => {
     }
 }
 
-export const createPost = async () => {
+export const createPost = async ( body : IPostForm ) => {
+    const file = body.media;
+    console.log(file)
+    const data: IPost = {
+        authorN: "Eyder",
+        authorL: "Huayta",
+        action: "ha publicado un post",
+        content: body.content,
+        date: new Date(),
+        likes: 0,
+        likesD: [],
+        comments: 0,
+        commentsD: [],
+        privacy: body.privacy,
+        privacyD: [],
+        searchs: 0,
+        searchsD: [],
+        typeMedia: "image",
+        urlMedia: "img/favicon.jpg",
+      };
+      
     try {
-        const data = {
-            'author': 'xd',
-            'action': 'xd',
-            'date' : 'xd',
-            'content': 'xd',
-            'urlMedia': '',
-            'typeMedia': '',
-            'likes': 0,
-            'likesD': [],
-            'comments': 0,
-            'commentsD': [],
-            'searchs': 0,
-            'searchsD': [],
-            'privacy' : "Public",
-            'privacyD' : []
-        }
         const docRef = await db.collection('posts').add(data)
         const doc_id = docRef.id
         return { id: doc_id };

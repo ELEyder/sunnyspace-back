@@ -10,7 +10,7 @@
   },
   "scripts": {
     "tsc": "tsc",
-    "start": "node build/index.js",
+    "start": "node --max-old-space-size=4096 build/index.js",
     "dev": "ts-node-dev src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

@@ -8,8 +8,8 @@ router.get('/', async (_, res) => {
     res.json(response)
 })
 
-router.post('/create', async (_, res) => {
-    const response = await createPost()
+router.post('/create', async (req , res) => {
+    const response = await createPost(req.body)
     res.json(response)
 })
 
